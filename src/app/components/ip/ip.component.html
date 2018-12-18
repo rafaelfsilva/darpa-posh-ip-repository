@@ -1,0 +1,321 @@
+<h2 class="ui dividing header">
+  <i class="microchip icon" style="font-size: 0.8em"></i>
+  <div class="content">
+    {{ipJSON['basic-information']['core-name']}}
+  </div>
+</h2>
+
+<div class="ui container">
+  <div class="ui labeled tiny button" tabindex="0">
+    <div class="ui blue tiny button">
+      Categories
+    </div>
+    <div class="ui basic blue label">
+      {{ipJSON['basic-information'].category}}
+    </div>
+    <div class="ui basic teal left pointing label" ng-if="ipJSON['basic-information'].subcategory">
+      {{ipJSON['basic-information'].subcategory}}
+    </div>
+    <div class="ui basic teal left pointing label" ng-if="ipJSON['basic-information'].subsubcategory">
+      {{ipJSON['basic-information'].subsubcategory}}
+    </div>
+  </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<sui-tabset>
+  <div class="ui pointing secondary menu">
+    <a class="item" suiTabHeader="basic-information">Basic Information</a>
+    <a class="item" suiTabHeader="quality-verification">Quality Verification</a>
+    <a class="item" suiTabHeader="file-system">File System</a>
+    <a class="item" suiTabHeader="common-attributes">Common Attributes</a>
+    <a class="item" suiTabHeader="design-reuse-support">Design Reuse Support</a>
+    <a class="item" suiTabHeader="level-of-maturity">Level of Maturity</a>
+  </div>
+
+  <!-- BASIC INFORMATION -->
+  <div class="ui tab segment active" suiTabContent="basic-information">
+    {{ipJSON['basic-information']['description']}}
+
+    <div class="ui hidden divider"></div>
+
+    <table class="ui celled striped table">
+      <thead>
+      <th colspan="2">Category Specific Attributes</th>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let key of objectKeys(ipJSON['basic-information']['category-specific-data'])">
+        <td class="collapsing">
+          {{parseCategoryKey(key)}}
+        </td>
+        <td>
+          <div *ngIf="isFile(ipJSON['basic-information']['category-specific-data'][key])">
+            <div class="ui left labeled tiny button" tabindex="0">
+              <a class="ui blue label" href="{{ipJSON['basic-information']['category-specific-data'][key]}}">
+                Link to File
+              </a>
+              <div class="ui icon blue tiny basic button">
+                <i class="gitlab icon"></i>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isYesNo(ipJSON['basic-information']['category-specific-data'][key])">
+                    <span
+                      class="ui {{parseLabelColor(ipJSON['basic-information']['category-specific-data'][key])}} label">
+                      {{ipJSON['basic-information']['category-specific-data'][key]}}
+                    </span>
+          </div>
+          <div
+            *ngIf="!isYesNo(ipJSON['basic-information']['category-specific-data'][key]) && !isFile(ipJSON['basic-information']['category-specific-data'][key])">
+            {{ipJSON['basic-information']['category-specific-data'][key]}}
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FILE SYSTEM-->
+  <div class="ui tab segment" suiTabContent="file-system">
+    <sui-tabset>
+      <div class="ui grid">
+        <div class="four wide column">
+          <div class="ui vertical fluid tabular menu">
+            <a class="item active" suiTabHeader="general">General</a>
+            <a class="item" suiTabHeader="design"><i class="folder icon"></i> Design</a>
+            <a class="item" suiTabHeader="testing-and-verification"><i class="folder icon"></i> Testing and Verification</a>
+            <a class="item" suiTabHeader="manuals"><i class="folder icon"></i> Manuals</a>
+            <a class="item" suiTabHeader="applications"><i class="folder icon"></i> Applications</a>
+          </div>
+        </div>
+        <div class="twelve wide stretched column">
+
+          <!-- GENERAL -->
+          <div class="ui" suiTabContent="general" style="padding: 1em">
+            <table class="ui celled striped table">
+              <tbody>
+              <tr *ngFor="let key of ['special-tools', 'training-courses']">
+                <td class="collapsing">
+                  {{getTitleText(['file-system', key])}}
+                  <i class="question circle icon" suiPopup
+                     popupText="{{getPopupText(['file-system', key])}}" popupInverted></i>
+                </td>
+                <td>
+                  <div *ngIf="isFile(ipJSON['file-system'][key])">
+                    <div class="ui left labeled tiny button" tabindex="0">
+                      <a class="ui blue label" href="{{ipJSON['file-system'][key]}}">
+                        Link to File
+                      </a>
+                      <div class="ui icon blue tiny basic button">
+                        <i class="gitlab icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isYesNo(ipJSON['file-system'][key])">
+                    <span class="ui {{parseLabelColor(ipJSON['file-system'][key])}} label">
+                      {{ipJSON['file-system'][key]}}
+                    </span>
+                  </div>
+                  <div *ngIf="!isYesNo(ipJSON['file-system'][key]) && !isFile(ipJSON['file-system'][key])">
+                    {{ipJSON['file-system'][key]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ui" suiTabContent="{{tabKey}}" style="padding: 1em"
+               *ngFor="let tabKey of ['design', 'testing-and-verification', 'manuals', 'applications']">
+            <table class="ui celled striped table">
+              <tbody>
+              <tr *ngFor="let key of parseTabKey('file-system', tabKey)">
+                <td class="collapsing">
+                  {{getTitleText(['file-system', tabKey, key])}}
+                  <i class="question circle icon" *ngIf="getPopupText(['file-system', tabKey, key])" suiPopup
+                     popupText="{{getPopupText(['file-system', tabKey, key])}}" popupInverted></i>
+                </td>
+                <td>
+                  <div *ngIf="isFile(ipJSON['file-system'][tabKey][key])">
+                    <div class="ui left labeled tiny button" tabindex="0">
+                      <a class="ui blue label" href="{{ipJSON['file-system'][tabKey][key]}}">
+                        Link to File
+                      </a>
+                      <div class="ui icon blue tiny basic button">
+                        <i class="gitlab icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="!isFile(ipJSON['file-system'][tabKey][key])">
+                    <span class="ui {{parseLabelColor(ipJSON['file-system'][tabKey][key])}} label">
+                      {{ipJSON['file-system'][tabKey][key]}}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </sui-tabset>
+  </div>
+
+  <!-- COMMON ATTRIBUTES -->
+  <div class="ui tab segment" suiTabContent="common-attributes">
+    <sui-tabset>
+      <div class="ui grid">
+        <div class="four wide column">
+          <div class="ui vertical fluid tabular menu">
+            <a class="item active" suiTabHeader="general">General</a>
+            <a class="item" suiTabHeader="vendor-implement"><i class="industry icon"></i> Vendor Implement</a>
+            <a class="item" suiTabHeader="specifications"><i class="industry icon"></i> Specifications</a>
+          </div>
+        </div>
+        <div class="twelve wide stretched column">
+
+          <!-- GENERAL -->
+          <div class="ui" suiTabContent="general" style="padding: 1em">
+            <table class="ui celled striped table">
+              <tbody>
+              <tr *ngFor="let key of ['vendor-core']">
+                <td class="collapsing">
+                  {{getTitleText(['common-attributes', key])}}
+                  <i class="question circle icon" *ngIf="getPopupText(['common-attributes', key])" suiPopup
+                     popupText="{{getPopupText(['common-attributes', key])}}" popupInverted></i>
+                </td>
+                <td>
+                  <div *ngIf="isFile(ipJSON['common-attributes'][key])">
+                    <div class="ui left labeled tiny button" tabindex="0">
+                      <a class="ui blue label" href="{{ipJSON['common-attributes'][key]}}">
+                        Link to File
+                      </a>
+                      <div class="ui icon blue tiny basic button">
+                        <i class="gitlab icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isYesNo(ipJSON['common-attributes'][key])">
+                    <span class="ui {{parseLabelColor(ipJSON['common-attributes'][key])}} label">
+                      {{ipJSON['common-attributes'][key]}}
+                    </span>
+                  </div>
+                  <div *ngIf="!isYesNo(ipJSON['common-attributes'][key]) && !isFile(ipJSON['common-attributes'][key])">
+                    {{ipJSON['common-attributes'][key]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- VENDOR IMPLEMENT -->
+          <div class="ui" suiTabContent="vendor-implement" style="padding: 1em">
+            <table class="ui celled striped table" *ngFor="let tabKey of ['asic-fabricator', 'fpga-vendor']">
+              <thead>
+              <th colspan="2">{{getTitleText(['common-attributes', 'vendor-implement', tabKey])}}</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let key of parseTabKey('common-attributes', tabKey)">
+                <td>
+                  {{getTitleText(['common-attributes', 'vendor-implement', tabKey, key])}}
+                  <i class="question circle icon"
+                     *ngIf="getPopupText(['common-attributes', 'vendor-implement', tabKey, key])" suiPopup
+                     popupText="{{getPopupText(['common-attributes', 'vendor-implement', tabKey, key])}}"
+                     popupInverted></i>
+                </td>
+                <td>
+                  <div *ngIf="isYesNo(ipJSON['common-attributes']['vendor-implement'][tabKey][key])">
+                    <span
+                      class="ui {{parseLabelColor(ipJSON['common-attributes']['vendor-implement'][tabKey][key])}} label">
+                      {{ipJSON['common-attributes']['vendor-implement'][tabKey][key]}}
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="!isYesNo(ipJSON['common-attributes']['vendor-implement'][tabKey][key]) && !isFile(ipJSON['common-attributes']['vendor-implement'][tabKey][key])">
+                    {{ipJSON['common-attributes']['vendor-implement'][tabKey][key]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ALL -->
+          <div class="ui" suiTabContent="{{tabKey}}" style="padding: 1em" *ngFor="let tabKey of ['specifications']">
+            <table class="ui celled striped table">
+              <tbody>
+              <tr *ngFor="let key of parseTabKey('common-attributes', tabKey)">
+                <td class="collapsing">
+                  {{getTitleText(['common-attributes', tabKey, key])}}
+                  <i class="question circle icon" *ngIf="getPopupText(['common-attributes', tabKey, key])" suiPopup
+                     popupText="{{getPopupText(['common-attributes', tabKey, key])}}" popupInverted></i>
+                </td>
+                <td>
+                  <div *ngIf="isFile(ipJSON['common-attributes'][tabKey][key])">
+                    <div class="ui left labeled tiny button" tabindex="0">
+                      <a class="ui blue label" href="{{ipJSON['common-attributes'][tabKey][key]}}">
+                        Link to File
+                      </a>
+                      <div class="ui icon blue tiny basic button">
+                        <i class="gitlab icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isYesNo(ipJSON['common-attributes'][tabKey][key])">
+                    <span class="ui {{parseLabelColor(ipJSON['common-attributes'][tabKey][key])}} label">
+                      {{ipJSON['common-attributes'][tabKey][key]}}
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="!isYesNo(ipJSON['common-attributes'][tabKey][key]) && !isFile(ipJSON['common-attributes'][tabKey][key])">
+                    {{ipJSON['common-attributes'][tabKey][key]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </sui-tabset>
+  </div>
+
+  <!-- OTHER TABS -->
+  <div class="ui tab segment" suiTabContent="{{tabKey}}"
+       *ngFor="let tabKey of ['quality-verification', 'design-reuse-support', 'level-of-maturity']">
+    <table class="ui celled striped table">
+      <tbody>
+      <tr *ngFor="let key of parseTabKey(tabKey, null)">
+        <td class="collapsing">
+          {{getTitleText([tabKey, key])}}
+          <i class="question circle icon" *ngIf="getPopupText([tabKey, key])" suiPopup
+             popupText="{{getPopupText([tabKey, key])}}" popupInverted></i>
+        </td>
+        <td>
+          <div *ngIf="isFile(ipJSON[tabKey][key])">
+            <div class="ui left labeled tiny button" tabindex="0">
+              <a class="ui blue label" href="{{ipJSON[tabKey][key]}}">
+                Link to File
+              </a>
+              <div class="ui icon blue tiny basic button">
+                <i class="gitlab icon"></i>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isYesNo(ipJSON[tabKey][key])">
+                    <span class="ui {{parseLabelColor(ipJSON[tabKey][key])}} label">
+                      {{ipJSON[tabKey][key]}}
+                    </span>
+          </div>
+          <div *ngIf="!isYesNo(ipJSON[tabKey][key]) && !isFile(ipJSON[tabKey][key])">
+            {{ipJSON[tabKey][key]}}
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</sui-tabset>
