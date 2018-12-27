@@ -14,6 +14,7 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # install app
+ADD https://api.github.com/repos/rafaelfsilva/darpa-posh-ip-repository/git/refs/heads/master /tmp/version.json
 RUN git clone https://github.com/rafaelfsilva/darpa-posh-ip-repository /usr/src/app
 
 # install and cache app dependencies
