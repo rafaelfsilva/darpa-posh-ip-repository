@@ -11,7 +11,8 @@ import { FooterComponent } from './components/footer/footer.component';
 // import {SemanticDropdownComponent} from './components/semantic-dropdown/semantic-dropdown.component';
 
 import {DashboardComponent} from './components/dashboard';
-import {IPComponent} from './components/ip';
+import {IPComponent} from './components/ip-view';
+import {IPListComponent} from './components/ip-list';
 
 import {UserService, DashboardEvent} from './services';
 
@@ -44,7 +45,8 @@ library.add(faLock, faTags);
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    IPComponent
+    IPComponent,
+    IPListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 export const ipSchema = {
   '$schema': 'http://json-schema.org/draft-06/schema#',
-  '$id': 'https://craftproject.org/schema/ip',
+  '$id': 'https://craftproject.org/schema/ip-view',
   'type': 'object',
   'title': 'IP Cores',
   'definitions': {

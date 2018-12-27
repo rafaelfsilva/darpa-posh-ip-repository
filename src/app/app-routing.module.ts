@@ -2,7 +2,8 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {DashboardComponent} from './components/dashboard';
-import {IPComponent} from './components/ip';
+import {IPComponent} from './components/ip-view';
+import {IPListComponent} from './components/ip-list';
 // import {AuthGuard} from './guards';
 // import {LoginComponent} from './components/login';
 // import {RegisterComponent} from './components/register';
@@ -10,7 +11,8 @@ import {IPComponent} from './components/ip';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
-  {path: 'ip/:ipID', component: IPComponent},
+  {path: 'ip-list', component: IPListComponent},
+  {path: 'ip-view/:ipID', component: IPComponent},
   // {path: 'login', component: LoginComponent},
   // {path: 'register', component: RegisterComponent},
   // {path: 'projects/:projectId', component: ProjectComponent},

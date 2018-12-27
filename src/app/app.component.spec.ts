@@ -19,13 +19,13 @@ describe('AppComponent', () => {
   it(`should have as title 'ip-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ip-app');
+    expect(app.title).toEqual('ip-view-app');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ip-app!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ip-view-app!');
   });
 });

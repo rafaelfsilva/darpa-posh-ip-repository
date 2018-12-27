@@ -3,7 +3,7 @@ import {BaseComponent} from '../../classes/base-component';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as ipSchema from '../../dependencies/schemas/ip-schema';
 
-// import mockIP from '/Users/rafsilva/Documents/isi/workspace/posh/ip-app/src/app/dependencies/files/ip.json';
+// import mockIP from '/Users/rafsilva/Documents/isi/workspace/posh/ip-view-app/src/app/dependencies/files/ip-view.json';
 
 @Component({
   selector: 'posh-ip',
