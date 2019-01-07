@@ -1,0 +1,92 @@
+{
+  "basic-information": {
+    "core-name": "VCO",
+    "description": "IP Description",
+    "category": "Analog & Mixed Signal",
+    "subcategory": "VCO",
+    "subsubcategory": "Voltage-Controlled Ring Oscillator (VCRO)",
+    "category-specific-data": {
+      "bandwidth": "N/A",
+      "phase-noise-jitter": "N/A",
+      "center-frequency": "N/A",
+      "power": "N/A",
+      "stages": "N/A",
+      "vdd": "N/A",
+      "adjustable-output-amplitude": "N/A",
+      "current-consumption": "N/A"
+    }
+  },
+  "common-attributes": {
+    "vendor-core": "N/A",
+    "vendor-implement": {
+      "asic-fabricator": {
+        "name": "N/A",
+        "technology": "N/A"
+      },
+      "fpga-vendor": {
+        "name": "N/A",
+        "chips": "N/A"
+      }
+    },
+    "specifications": {
+      "standard": "N/A",
+      "clock-frequency": "N/A",
+      "area": "N/A",
+      "power-consumption": "N/A",
+      "special-tools-req": "N/A",
+      "low-power-support": "N/A",
+      "components": "N/A",
+      "version": "N/A",
+      "needs-special-tools": "N/A"
+    }
+  },
+  "design-reuse-support": {
+    "used-in-other-asic-designs": "N/A",
+    "synthesis-scripts-into-gate-level-netlist": "N/A"
+  },
+  "level-of-maturity": {
+    "characterization-data-from-silicon": "N/A",
+    "comprehensiveness-of-verification": "N/A",
+    "number-of-downloads": 0,
+    "user-rating": 0,
+    "number-of-chips-implemented": 0
+  },
+  "file-system": {
+    "design": {
+      "rtl-design": "N/A",
+      "gate-level-netlist": "N/A",
+      "physical-layout": "N/A",
+      "readme": "N/A"
+    },
+    "special-tools": "N/A",
+    "testing-and-verification": {
+      "testbenches": "N/A",
+      "design-corners-and-results": "N/A",
+      "scripts": "N/A",
+      "fpga-synthesis-result": "N/A",
+      "readme": "N/A"
+    },
+    "manuals": {
+      "algorithms": "YES",
+      "timing-diagrams": "YES",
+      "diagrams-structure-architecture": "YES",
+      "description-design-architecture": "YES",
+      "input-output-pins": "N/A",
+      "verification-fpga": "N/A",
+      "file-directory-structure": "N/A",
+      "related-products-ips": "YES"
+    },
+    "applications": {
+      "source-code": "YES",
+      "executable": "N/A",
+      "readme": "N/A"
+    },
+    "training-courses": "YES"
+  },
+  "quality-verification": {
+    "testbenches": "N/A",
+    "testbenches-results": "N/A",
+    "num-teams-simulation": 0,
+    "num-teams-use": 0
+  }
+}
